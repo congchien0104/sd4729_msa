@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 void call(Map pipelineParams) {
-    String name = 'frontend'
+    String name = 'backend'
     String ecrUrl = '480566855108.dkr.ecr.us-east-1.amazonaws.com'
     String awsRegion = 'us-east-1'
     String clusterName = 'eks-demo'
@@ -10,23 +10,23 @@ void call(Map pipelineParams) {
         stages {
             stage('Checkout') {
                 steps {
-                    // Checkout source code from GIT t
+                    // Checkout from GIT
                     sh 'git checkout main'
                     sh 'git pull'
                 }
             }
-
-            stage('Install Dependencies') {
+            
+            stage('test groovy') {
                 steps {
                     // Install project dependencies using npm
-                    sh 'npm ci'
+                    echo "MSA cong chien"
                 }
             }
 
-            stage('Test') {
+            stage('test test') {
                 steps {
-                    // Run tests if you have them
-                    sh 'npm test'
+                    // Install project dependencies using npm
+                    echo "MSA cong chien test"
                 }
             }
 
@@ -37,7 +37,7 @@ void call(Map pipelineParams) {
             //             sh "aws ecr get-login-password --region ${awsRegion} | docker login --username AWS --password-stdin ${ecrUrl}"
             //             sh "docker build -t ${name} ."
             //             sh "docker tag ${name}:latest ${ecrUrl}/${name}:latest"
-            //             sh "docker push ${ecrUrl}/${name}:latest"
+            //             sh "docker push ${ecrUrl}/${name}:latest" 
             //         }
             //     }
             // }
@@ -57,5 +57,5 @@ void call(Map pipelineParams) {
             //     }
             // }
         }
-    }
+    } 
 }

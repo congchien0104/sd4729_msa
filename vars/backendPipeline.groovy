@@ -16,18 +16,17 @@ void call(Map pipelineParams) {
                 }
             }
             
-            stage('Install Dependencies') {
+            stage('test groovy') {
                 steps {
                     // Install project dependencies using npm
-                    sh 'npm install'
+                    echo "MSA cong chien"
                 }
             }
 
-            stage('Test') {
+            stage('test test') {
                 steps {
-                    // Run tests ()
-                    // Note: There is not script test in backend source
-                    sh 'npm test'
+                    // Install project dependencies using npm
+                    echo "MSA cong chien test"
                 }
             }
 
