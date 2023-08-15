@@ -16,10 +16,10 @@ void call(Map pipelineParams) {
                 }
             }
 
-            stage('test test') {
+            stage('Neymar') {
                 steps {
                     // Install project dependencies using npm
-                    echo "MSA cong chien test"
+                    echo "MSA cong chien test 14"
                 }
             }
 

@@ -16,22 +16,16 @@ void call(Map pipelineParams) {
                 }
             }
 
-            stage('test test') {
+            stage('Neymar') {
                 steps {
                     // Install project dependencies using npm
-                    echo "MSA cong chien test"
+                    echo "MSA cong chien test 14"
                 }
             }
 
             stage('Build Docker Image') {
                 steps {
-                    // Build Docker Image for Application
-                    withAWS(credentials: 'aws-credentials', region: "${awsRegion}") {
-                        sh "aws ecr get-login-password --region ${awsRegion} | docker login --username AWS --password-stdin ${ecrUrl}"
-                        sh "docker build -t ${name} ."
-                        sh "docker tag ${name}:latest ${ecrUrl}/${name}:latest"
-                        sh "docker push ${ecrUrl}/${name}:latest" 
-                    }
+                    sh "docker build -t ${name} ."
                 }
             }
 
