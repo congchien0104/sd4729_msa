@@ -27,7 +27,7 @@ void call(Map pipelineParams) {
                 steps {
                     // Build Docker Image for Application
                     withAWS(credentials: 'aws-credentials', region: "${awsRegion}") {
-                        sh "aws ecr get-login-password --region ${awsRegion} | docker login --username AWS --password-stdin ${ecrUrl}"
+                        sh "docker login -u AWS -p $(aws ecr get-login-password --region ${awsRegion}) ${ecrUrl}"
                         sh "docker build -t ${name} ."
                         sh "docker tag ${name}:latest ${ecrUrl}/${name}:latest"
                         sh "docker push ${ecrUrl}/${name}:latest" 
