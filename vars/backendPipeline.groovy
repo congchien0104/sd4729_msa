@@ -26,7 +26,7 @@ void call(Map pipelineParams) {
             stage('Build Docker Image') {
                 steps {
                     sh "docker build -t ${name} ."
-                    docker.withRegistry('https://893473272543.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials')
+                    //docker.withRegistry('https://893473272543.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials')
                     // Build Docker Image for Application
                     // withAWS(credentials: 'aws-credentials', region: "${awsRegion}") {
                     //     sh "aws ecr get-login-password --region ${awsRegion} | docker login --username AWS --password-stdin ${ecrUrl}"
