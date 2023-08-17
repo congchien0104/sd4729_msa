@@ -23,12 +23,6 @@ void call(Map pipelineParams) {
                 }
             }
 
-            stage('Build') {
-                steps {
-                    sh 'npm install'
-                }
-            }
-
             stage('Build Docker Image') {
                 steps {
                     // Build Docker Image for Application
