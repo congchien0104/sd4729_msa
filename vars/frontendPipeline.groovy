@@ -33,7 +33,7 @@ void call(Map pipelineParams) {
                     withAWS(credentials: 'aws-credentials', region: "${awsRegion}") {
                         sh "aws eks describe-cluster --region ${awsRegion} --name ${clusterName} --query cluster.status"
                         sh "aws eks --region ${awsRegion} update-kubeconfig --name ${clusterName}"
-                        sh 'kubectl create ns eks-ns'
+                        //sh 'kubectl create ns eks-ns'
                         sh 'kubectl apply -f .cd/frontend.yaml'
                     }
                 }
