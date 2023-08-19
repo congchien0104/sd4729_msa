@@ -1,9 +1,9 @@
 #!/usr/bin/env groovy
 void call(Map pipelineParams) {
-    String name = 'backend'
+    String name = 'todo-be'
     String ecrUrl = '893473272543.dkr.ecr.us-east-1.amazonaws.com'
     String awsRegion = 'us-east-1'
-    String clusterName = 'eks-demo'
+    String clusterName = 'DevOpsEKScluster'
     pipeline {
         agent any
 
@@ -13,13 +13,6 @@ void call(Map pipelineParams) {
                     // Checkout from GIT
                     sh 'git checkout main'
                     sh 'git pull'
-                }
-            }
-
-            stage('test test') {
-                steps {
-                    // Install project dependencies using npm
-                    echo "MSA cong chien test"
                 }
             }
 
@@ -35,20 +28,16 @@ void call(Map pipelineParams) {
                 }
             }
 
-            // stage('Deploy') {
-            //     steps {
-            //         withAWS(credentials: 'aws-credentials', region: "${awsRegion}") {
-            //             withKubeConfig([credentialsId: 'eks-credentials']) {
-            //                 sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-            //                 sh 'chmod u+x ./kubectl'
-            //                 sh "./kubectl config set-context --current --namespace eks-ns"
-            //                 sh "aws eks describe-cluster --region ${awsRegion} --name ${clusterName} --query cluster.status"
-            //                 sh "aws eks --region ${awsRegion} update-kubeconfig --name ${clusterName}"
-            //                 sh "./kubectl rollout restart deploy ${name}"
-            //             }
-            //         }
-            //     }
-            // }
+            stage('Deploy') {
+                steps {
+                    withAWS(credentials: 'aws-credentials', region: "${awsRegion}") {
+                        sh "aws eks describe-cluster --region ${awsRegion} --name ${clusterName} --query cluster.status"
+                        sh "aws eks --region ${awsRegion} update-kubeconfig --name ${clusterName}"
+                        sh 'kubectl create ns eks-ns'
+                        sh 'kubectl apply -f .cd/backend.yaml'
+                    }
+                }
+            }
         }
     } 
 }
